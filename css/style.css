@@ -1,0 +1,316 @@
+/* =========================================================
+   style.css — Expense & Budget Visualizer
+   ========================================================= */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  color: #2d3748;
+  min-height: 100vh;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* ── Layout Container ── */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Header ── */
+.app-header {
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.app-header h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #1a202c;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  margin-top: 0.4rem;
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+/* ── Card ── */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.card h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d3748;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+/* ── Form ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #2d3748;
+  background: #f7fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  background: #fff;
+}
+
+.form-group input.input-error,
+.form-group select.input-error {
+  border-color: #e53e3e;
+}
+
+.error-msg {
+  font-size: 0.78rem;
+  color: #e53e3e;
+  min-height: 1rem;
+}
+
+/* ── Button Primary ── */
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* ── Summary Card ── */
+.total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+}
+
+.total-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.total-amount {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* ── Pie Chart ── */
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+#pie-chart {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.empty-chart-msg {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #a0aec0;
+  text-align: center;
+}
+
+/* ── Transaction List ── */
+.transaction-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #cbd5e0;
+  transition: background 0.15s;
+  gap: 0.5rem;
+}
+
+/* Warna aksen per kategori */
+.transaction-item[data-category="Food"]      { border-left-color: #f6ad55; }
+.transaction-item[data-category="Transport"] { border-left-color: #63b3ed; }
+.transaction-item[data-category="Fun"]       { border-left-color: #68d391; }
+
+.transaction-item:hover {
+  background: #edf2f7;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-meta {
+  font-size: 0.78rem;
+  color: #718096;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.badge-Food      { background: #ed8936; }
+.badge-Transport { background: #3182ce; }
+.badge-Fun       { background: #38a169; }
+
+.item-amount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e53e3e;
+  white-space: nowrap;
+}
+
+/* ── Delete Button ── */
+.btn-delete {
+  background: none;
+  border: 1.5px solid #fc8181;
+  color: #e53e3e;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-delete:hover {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.empty-list-msg {
+  font-size: 0.875rem;
+  color: #a0aec0;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card {
+    padding: 1.1rem;
+  }
+
+  .chart-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #pie-chart {
+    width: 150px;
+    height: 150px;
+  }
+
+  .total-amount {
+    font-size: 1.15rem;
+  }
+}
